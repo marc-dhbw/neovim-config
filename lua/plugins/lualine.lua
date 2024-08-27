@@ -33,11 +33,6 @@ lualine.setup({
 			current_time, -- Adds the time function here
 		},
 	},
-	inactive_sections = {
-		lualine_a = { "filename" },
-		lualine_x = { "location" },
-		lualine_z = {},
-	},
 	tabline = {},
 	extensions = {},
 })

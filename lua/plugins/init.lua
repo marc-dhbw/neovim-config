@@ -49,6 +49,21 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- Lua line
+	{
+		"nvim-lualine/lualine.nvim",
+		event = { "BufWinEnter", "BufReadPre", "BufNewFile" },
+		config = function()
+			require("plugins.lualine")
+		end,
+	},
+	{
+		"goolord/alpha-nvim",
+		dependencies = { "echasnovski/mini.icons" },
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
+	},
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
 	--
@@ -368,14 +383,6 @@ require("lazy").setup({
 		},
 		config = function()
 			require("plugins.neo-tree")
-		end,
-	},
-	-- Lua line
-	{
-		"nvim-lualine/lualine.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("plugins.lualine")
 		end,
 	},
 
