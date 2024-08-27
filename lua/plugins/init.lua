@@ -245,7 +245,7 @@ require("lazy").setup({
 			vim.g.kanagawa_global_status = true
 
 			-- Apply the colorscheme
-			vim.cmd("colorscheme kanagawa-dragon") --wave, dragon, lotus
+			vim.cmd("colorscheme kanagawa-wave") --wave, dragon, lotus
 		end,
 	},
 	--[[
