@@ -11,10 +11,12 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = "nord",
 	},
 	sections = {
-		lualine_a = {
+		lualine_a = { "mode" },
+		lualine_b = { "branch" },
+		lualine_c = {
 			{
 				"filename",
 				path = 1,
@@ -32,11 +34,6 @@ lualine.setup({
 			"location", -- Shows current line and column number
 			current_time, -- Adds the time function here
 		},
-	},
-	inactive_sections = {
-		lualine_a = { "filename" },
-		lualine_x = { "location" },
-		lualine_z = {},
 	},
 	tabline = {},
 	extensions = {},

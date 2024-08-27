@@ -232,43 +232,6 @@ require("lazy").setup({
 			require("plugins.cmp")
 		end,
 	},
-	{
-		"rebelot/kanagawa.nvim",
-		config = function()
-			-- Set Kanagawa options directly
-			vim.g.kanagawa_transparent = false
-			vim.g.kanagawa_italic_comments = true
-			vim.g.kanagawa_italic_keywords = true
-			vim.g.kanagawa_italic_functions = false
-			vim.g.kanagawa_italic_variables = false
-			vim.g.kanagawa_dim_inactive = true
-			vim.g.kanagawa_global_status = true
-
-			-- Apply the colorscheme
-			vim.cmd("colorscheme kanagawa-dragon") --wave, dragon, lotus
-		end,
-	},
-	--[[
-	{ -- You can easily change to a different colorscheme.
-		-- Change the name of the colorscheme plugin below, and then
-		-- change the command in the config to whatever the name of that colorscheme is.
-		--
-		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-		"folke/tokyonight.nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
-		init = function()
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-			vim.cmd.colorscheme("tokyonight-storm")
-
-			-- You can configure highlights by doing something like:
-			vim.cmd.hi("Comment gui=none")
-		end,
-	},
-  ]]
-	--
-
 	-- Highlight todo, notes, etc in comments
 	{
 		"folke/todo-comments.nvim",
@@ -378,13 +341,6 @@ require("lazy").setup({
 			require("plugins.lualine")
 		end,
 	},
-
-	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-	--    This is the easiest way to modularize your config.
-	--
-	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-	--    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-	-- { import = 'custom.plugins' },
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
