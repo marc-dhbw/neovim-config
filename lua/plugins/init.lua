@@ -332,8 +332,6 @@ require("lazy").setup({
 				"query",
 				"vim",
 				"vimdoc",
-				"js",
-				"json",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
