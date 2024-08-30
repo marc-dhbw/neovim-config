@@ -36,7 +36,7 @@ function CompileAndRunC()
 	end
 
 	-- Create the output file path
-	local output_file = current_dir .. "/a.out"
+	local output_file = current_dir .. "/a.exe"
 
 	-- Create the compile command by joining all found C files
 	local compile_command = "zig cc -o " .. output_file .. " " .. table.concat(c_files, " ")

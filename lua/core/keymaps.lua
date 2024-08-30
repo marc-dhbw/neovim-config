@@ -38,3 +38,12 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.api.nvim_set_keymap("i", "{", "{<CR>}<Esc>O", { noremap = true, silent = true })
 -- Keymap for running C code with Zig using Space + r
 vim.api.nvim_set_keymap("n", "<leader>rr", ":lua CompileAndRunC()<CR>", { noremap = true, silent = true })
+
+-- Resize with Ctrl + Arrow keys
+vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
+
+-- Define a key mapping to run the current file with Node.js
+vim.api.nvim_set_keymap("n", "<leader>rj", ":w<CR>:!node %<CR>", { noremap = true, silent = false })
