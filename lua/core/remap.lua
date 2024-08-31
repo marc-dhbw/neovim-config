@@ -1,4 +1,8 @@
 vim.g.mapleader = " "
+
+vim.keymap.set("i", "jk", "<Esc>",{silent = true})
+vim.keymap.set("i", "jj", "<Esc>",{silent = true})
+
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -20,8 +24,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- This is going to get me cancelled
-vim.keymap.set("i", "jj", "<Esc>")
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
@@ -34,4 +36,23 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
+end)
+
+vim.keymap.set("n", "<leader>s", "<C-w>s", { silent = true })
+vim.keymap.set("n", "<leader>d", "<C-w>v", { silent = true })
+
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+--auto open brackets
+vim.api.nvim_set_keymap("i", "{", "{<CR>}<Esc>O", { noremap = true, silent = true })
+-- Keymap for running C code with Zig using Space + r
+vim.api.nvim_set_keymap("n", "<leader>rr", ":lua CompileAndRunC()<CR>", { noremap = true, silent = true })
+
+--Sync System clipboard with nvim
+vim.schedule(function()
+    vim.opt.clipboard = "unnamedplus"
 end)
