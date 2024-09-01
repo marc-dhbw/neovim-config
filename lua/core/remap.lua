@@ -16,6 +16,9 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 
+-- Exit Terminal-Job mode using <Esc> key
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
 
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
