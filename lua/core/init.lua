@@ -32,54 +32,74 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Function to recursively find all C files and compile them with Zig
 function CompileAndRunC()
-        -- Save all current files
-        vim.cmd("wa")
-        -- Get the directory of the current file
-        local current_dir = vim.fn.expand("%:p:h")
+    -- Save all current files
+    vim.cmd("wa")
+    
+    -- Get the directory of the current file
+    local current_file = vim.fn.expand("%:p")
+    local current_dir = vim.fn.fnamemodify(current_file, ":p:h")
 
-        -- Function to recursively collect all .c files
-        local function find_c_files(dir)
-                local c_files = {}
+    -- Extract the directory name to use as the executable name
+    local dir_name = vim.fn.fnamemodify(current_dir, ":t")
+    local output_file = current_dir .. "/" .. dir_name .. ".exe"
 
-                -- Helper function to scan the directory
-                local function scan_dir(directory)
-                        local entries = vim.fn.readdir(directory)
-                        for _, entry in ipairs(entries) do
-                                local full_path = directory .. "/" .. entry
-                                if vim.fn.isdirectory(full_path) == 1 then
-                                        -- Recursively scan subdirectories
-                                        scan_dir(full_path)
-                                elseif entry:match("%.c$") then
-                                        table.insert(c_files, full_path)
-                                end
-                        end
+    -- Detect system path separator (use "\\" for Windows)
+    local path_sep = package.config:sub(1,1)  -- This returns "\\" on Windows and "/" on Unix-based systems
+
+    -- Function to recursively collect all .c files, ignoring .git directory
+    local function find_c_files(dir)
+        local c_files = {}
+
+        -- Helper function to scan the directory
+        local function scan_dir(directory)
+            local entries = vim.fn.readdir(directory)
+            for _, entry in ipairs(entries) do
+                local full_path = directory .. path_sep .. entry  -- Use appropriate path separator
+                if entry ~= ".git" then  -- Ignore .git directory
+                    if vim.fn.isdirectory(full_path) == 1 then
+                        -- Recursively scan subdirectories
+                        scan_dir(full_path)
+                    elseif entry:match("%.c$") then
+                        table.insert(c_files, full_path)
+                    end
                 end
-
-                scan_dir(dir)
-                return c_files
+            end
         end
 
-        -- Collect all .c files recursively starting from the current directory
-        local c_files = find_c_files(current_dir)
+        scan_dir(dir)
+        return c_files
+    end
 
-        if #c_files == 0 then
-                print("No C files found.")
-                return
-        end
+    -- Collect all .c files recursively starting from the current directory
+    local c_files = find_c_files(current_dir)
 
-        -- Create the output file path
-        local output_file = current_dir .. "/a.exe"
+    if #c_files == 0 then
+        print("No C files found.")
+        return
+    end
 
-        -- Create the compile command by joining all found C files
-        local compile_command = "zig cc -o " .. output_file .. " " .. table.concat(c_files, " ")
+    -- Join all .c files into a single line, space-separated
+    local c_files_str = table.concat(c_files, " ")
 
-        -- Run the compilation command
-        vim.cmd("!" .. compile_command)
+    -- Create the compile command by placing input files before the '-o' flag
+    local compile_command = "zig cc " .. c_files_str .. " -o " .. output_file
 
-        -- Run the executable if the compilation is successful
-        if vim.fn.filereadable(output_file) == 1 then
-                vim.cmd("!" .. output_file)
-        else
-                print("Compilation failed.")
-        end
+    -- Print the command for debugging
+    print("Compile command: " .. compile_command)
+
+    -- Run the compilation command
+    local compile_status = vim.fn.system(compile_command)
+
+    -- Print the compile output for debugging
+    print("Compile output: " .. compile_status)
+
+    -- Check if compilation was successful
+    if vim.fn.filereadable(output_file) == 1 then
+        -- Run the executable
+        vim.cmd("!" .. output_file)
+    else
+        print("Compilation failed.")
+        print(compile_status)  -- Print the error message from the compilation
+    end
 end
+
