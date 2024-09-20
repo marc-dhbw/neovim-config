@@ -42,22 +42,12 @@ return {
       local startup_theme = vim.g.colors_name or "gruvbox"  -- Fallback to "gruvbox" if no theme is set
       set_lualine_theme(startup_theme)
     end
-  },
-  -- Gruvbox theme
-  {
-    "ellisonleao/gruvbox.nvim",
-    config = function()
-      require("gruvbox").setup({
-        terminal_colors = true, -- add Neovim terminal colors
-        undercurl = true,
-        underline = true,
-        bold = true,
-      })
-    end
-  },
-  -- Rose Pine theme
-  { "rose-pine/neovim", name = "rose-pine" },
-  -- Lualine plugin
-  { "nvim-lualine/lualine.nvim" }
+    },
+    -- Gruvbox theme
+    {"morhetz/gruvbox"},
+    -- Rose Pine theme
+    { "rose-pine/neovim", name = "rose-pine" },
+    -- Lualine plugin
+    { "nvim-lualine/lualine.nvim" }
 }
 
