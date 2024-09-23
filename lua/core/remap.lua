@@ -19,7 +19,6 @@ vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")
 -- Exit Terminal-Job mode using <Esc> key
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
-
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -57,11 +56,13 @@ vim.api.nvim_set_keymap('n', '<C-Down>', ':resize -2<CR>', { noremap = true, sil
 vim.api.nvim_set_keymap('n', '<C-Left>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', { noremap = true, silent = true })
 
-
 --auto open brackets
 vim.api.nvim_set_keymap("i", "{", "{<CR>}<Esc>O", { noremap = true, silent = true })
 -- Keymap for running C code with Zig using Space + r
 vim.api.nvim_set_keymap("n", "<leader>rr", ":lua CompileAndRunC()<CR>", { noremap = true, silent = true })
+
+-- Run make and execute 
+vim.api.nvim_set_keymap("n", "<leader>m", ":!make<CR>:!./game<CR>", { noremap = true, silent = true })
 
 --Sync System clipboard with nvim
 vim.schedule(function()
