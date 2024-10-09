@@ -57,6 +57,9 @@ vim.api.nvim_set_keymap('n', '<C-Right>', ':vertical resize +2<CR>', { noremap =
 -- Keymap for running C code with Zig using Space + r
 vim.api.nvim_set_keymap("n", "<leader>rr", ":lua CompileAndRunC()<CR>", { noremap = true, silent = true })
 
+-- Run python script
+vim.api.nvim_set_keymap("n", "<leader>n", ":!python %<CR>", { noremap = true, silent = true })
+
 -- Run make and execute 
 vim.api.nvim_set_keymap("n", "<leader>m", ":!make<CR>:!./game<CR>", { noremap = true, silent = true })
 
