@@ -14,7 +14,7 @@ return {
                     "kanagawa-dragon",
                     "kanagawa-lotus",
                     "palenight",
-                    "256_noir",
+                    "quiet"
                 },
                 live_preview = true,  -- Enable live preview when switching themes
                 theme_config = {
@@ -71,5 +71,13 @@ return {
 
     --CUSTOM THEME
     -- Add Noir theme
+    --[[
+    {
+        name = "256_noir",
+        config = function()
+            require('256_noir').setup() -- Call the setup function from your theme file
+        end
+    },
+    --]]
 }
 
